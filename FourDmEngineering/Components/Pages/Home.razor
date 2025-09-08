@@ -1,0 +1,82 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<div class="gallery" @onmouseover="PauseRotation" @onmouseout="ResumeRotation"  >
+    @for (int i = 0; i < GalleryItems.Count; i++)
+    {
+        <div class="image-container @(i == CurrentImageIndex ? "active" : "")">
+            <img src="@GalleryItems[i].ImageUrl" alt="@GalleryItems[i].Title" />
+            <div class="overlay">
+                <h3>@GalleryItems[i].Title</h3>
+                <a href="@GalleryItems[i].Link" class="btn">View More</a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-container">
+    <p id="home-page-content-first-row"><strong id="home-page-content-first-row-bold">Welcome to
+            4DM-Engineering</strong> - a step ahead of everyone in the field of automation of various types of
+        technological processes.</p>
+    <p id="home-page-content-second-row"><strong id="home-page-content-second-row-bold">Our motto</strong> is to replace
+        risky technological processes with machines and help you in your everyday life.</p>
+    <p id="home-page-content-third-row"><strong id="home-page-content-second-row-bold">Our projects</strong> are based
+        in the field of industry, construction and home, as well as we offer separate services for the completion
+        (supplement) of already existing technological processes. Take a look at our services that we can offer you.</p>
+</div>
+
+<div class="container">
+    <div>
+        <h2 id="electronics">Electronics</h2>
+        <img src="images/electronics.png" alt="Electronics">
+    </div>
+    <div>
+        <h2 id="software">Software</h2>
+        <img src="images/software.png" alt="Software">
+    </div>
+    <div>
+        <h2 id="construction">Construction</h2>
+        <img src="images/construction.png" alt="Construction">
+    </div>
+</div>
+
+@code {
+
+    private const int Miliseconds = 5000;
+    private int CurrentImageIndex = 0;  
+    private bool _isPaused = false;
+
+    private class GalleryItem
+    {
+        public string ImageUrl { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Link { get; set; } = string.Empty;
+    }
+
+    private List<GalleryItem> GalleryItems = new List<GalleryItem>()
+    {
+        new GalleryItem { ImageUrl = "images/electronics.png", Title = "Electronics", Link = "./pages/electronics.html" },
+        new GalleryItem { ImageUrl = "images/software.png", Title = "Software", Link = "./pages/software.html" },
+        new GalleryItem { ImageUrl = "images/construction.png", Title = "Construction", Link = "./pages/construction.html" }
+    };
+
+    protected override void OnInitialized()
+    {
+        Timer? timer = new System.Threading.Timer(_ =>
+        {
+            InvokeAsync(() =>
+            {
+                if (!_isPaused)
+                {
+                    CurrentImageIndex = (CurrentImageIndex + 1) % GalleryItems.Count;
+                    StateHasChanged();
+                }
+            });
+        }, state: null, dueTime: Miliseconds, period: Miliseconds);
+    }
+
+    private void PauseRotation()  => _isPaused = true;
+    private void ResumeRotation() => _isPaused = false;
+}

@@ -1,0 +1,24 @@
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  padding-top: 3%;
+  padding-left: 1%;
+  padding-bottom: 10%;
+}
+
+.text-content > h1{
+  padding-bottom: 3%;
+}
+
+.text-content > ul{
+  padding-left: 4%;
+  font-size: 20px;
+  line-height: 28.79px;
+}
+
+.text-content > ul > li > a:link, a:visited{
+  color: #007FE0;
+  text-decoration: none;
+}

@@ -1,0 +1,50 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.main-container > h1 {
+  margin-left: 7%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5% 0%;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 633px;
+  background-color: #1f86b7;
+  border-radius: 17px;
+  font-weight: 700;
+  line-height: 28.79px;
+  color: white;
+  padding: 2% 1%;
+}
+
+.user > img {
+  width: 181px;
+  height: 181px;
+}
+
+.user > p {
+  text-align: center;
+}
+
+.name {
+  margin-top: 5%;
+  font-size: 20px;
+}
+
+.description {
+  margin-top: 15%;
+}
